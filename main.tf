@@ -134,7 +134,7 @@ resource "aws_security_group" "bastion_sg" {
 # Bastion Host
 resource "aws_instance" "bastion" {
   ami           = "ami-079457aae5e7585f2"
-  instance_type = "t3.micro"
+  instance_type = "t3.medium"
   subnet_id     = aws_subnet.public_subnets[0].id
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
   key_name      = "oye"
@@ -177,7 +177,7 @@ resource "aws_security_group" "nginx_sg" {
 # nginx Application Server
 resource "aws_instance" "nginx_server" {
   ami           = "ami-079457aae5e7585f2"
-  instance_type = "t3.micro"
+  instance_type = "t3.medium"
   subnet_id     = aws_subnet.private_subnets[0].id
   vpc_security_group_ids = [aws_security_group.nginx_sg.id]
   key_name      = "oye"
@@ -229,7 +229,7 @@ resource "aws_lb_listener" "http" {
 resource "aws_launch_template" "app_lt" {
   name          = "app-launch-template"
   image_id      = "ami-079457aae5e7585f2"
-  instance_type = "t3.micro"
+  instance_type = "t3.medium"
   key_name      = "oye"
 
   network_interfaces {
